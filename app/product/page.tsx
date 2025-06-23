@@ -243,7 +243,7 @@ export default function Product() {
                 <h3 className="text-lg font-bold text-center">Product Details</h3>
                 { 
                   selectedProduct ? (
-                    <div className="flex flex-col gap-2 text-center">
+                    <div className="flex flex-col gap-2 text-center justify-center items-center">
                       <h4 className="text-md font-semibold">
                         {selectedProduct.name}
                       </h4>
