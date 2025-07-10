@@ -1,0 +1,67 @@
+{
+    "Product": [
+        {
+            "id": 0,
+            "title": "Hydrocolloid",
+            "description": "A wide range of flavors for various food applications.",
+            "product": [
+                {
+                    "id": "0A",
+                    "name": "Carrageenan",
+                    "description": "A type of gum classified as a hydrocolloid, meaning it absorbs water and forms stable suspensions.",
+                    "longdescription": "A type of gum classified as a hydrocolloid, meaning it absorbs water and forms stable suspensions. It’s used as a food additive (E 407) and is extracted from red seaweeds (Rhodophyceae), for example Gracilaria fisheri. ",
+                    "bullets": [
+                        {
+                            "name": "Functionality in food",
+                            "data": [
+                                { "title": "Thickening agent", "description": "Increase viscosity." },
+                                { "title": "Emulsifier", "description": "Helps oils and fats mix uniformly with water." },
+                                { "title": "Gelling agent", "description": "Forms gels from carrageenan." },
+                                { "title": "Thermoreversible gel", "description": "Liquefies when heated." }
+                            ]
+                        }
+                    ],
+                    "image": "bg-[url(/images/carrageenan.jpg)]",
+                    "imageFile": "/images/carrageenan.jpg"
+                },
+                {
+                    "id": "0B",
+                    "name": "Agar Agar",
+                    "description": "A jelly-like substance derived from red algae.",
+                    "longdescription": "A jelly-like substance derived from red algae, specifically from species like Gracilaria and Gelidium, which belong to the Rhodophyceae family of seaweeds.",
+                    "bullets": [
+                        {
+                            "name": "Properties and Characteristics",
+                            "data": [
+                                { "title": "Strong Gelling Ability", "description": "Agar is renowned for its excellent gelling properties, forming firm, clear gels even at low concentrations."},
+                                { "title": "Neutrality", "description": "It is tasteless, odorless, and colorless, making it an ideal ingredient that doesn't alter the flavor or appearance of the food it's used in."},
+                                { "title": "Heat Resistance", "description": "Agar gels are stable and can withstand high temperatures without losing their gelling properties, making them suitable for hot preparations."},
+                                { "title": "Thermo-reversible", "description": "Agar gels are thermo-reversible, meaning they can be melted by heating and then re-solidified upon cooling, allowing for re-molding or re-texturing."},
+                                { "title": "Solubility", "description": "It readily dissolves in boiling water."}
+                            ]
+                        }
+                    ],
+                    "image": "bg-[url(/images/agar-agar.jpg)]",
+                    "imageFile": "/images/agar-agar.jpg"
+                },
+                {
+                    "id": "0C",
+                    "name": "Gellan gum",
+                    "description": "a polymeric microbial metabolic gum. It is an extracellular polysaccharide produced by a Gram-negative bacterium derived from water lily.",
+                    "longdescription": "A  polymeric microbial metabolic gum. It is an extracellular polysaccharide produced by a Gram-negative bacterium derived from water lily, Pseudomonas aeruginosa (Sphingomonaspaucimobilis), using small molecule carbohydrate such as glucose as a High acyl gellangum: The basic structure is a main chain, consisting of repeating tetrasaccharideunits, as shown in Figure 1a. In the natural form of this polysaccharide, there is one O-glycerol acyl substituent per unit and one O-acetyl substituent every other unit. This natural form of gellangum is called high acyl gellangum. The relative molecular weight is about 1 to 2 million. Low acyl gellangum: The acyl group is easily removed by alkali at high temperature, thus obtaining the deacylatedform from the natural form of gellangum,. We call it low acyl gellangum. The relative molecular weight is about 500,000.",
+                    "bullets": [],
+                    "image": "bg-[url(/images/gellan-gum.jpg)]",
+                    "imageFile": "/images/gellan-gum.jpg"
+                },
+                {
+                    "id": "0D"
+                }
+            ]
+        }
+    ],
+    "HomePage": {
+        "companyName": "INGREDIENT FLAVORS CO.,LTD",
+        "breifDescription": "Formula Consultant and supply food ingredients",
+        "aboutButton": "About Us"
+    }
+}   

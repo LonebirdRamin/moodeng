@@ -1,7 +1,10 @@
+import { useTranslations } from "next-intl";
 import { ArrowDownIcon } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
+  const t = useTranslations('HomePage');
+
   return (
     <div className="flex flex-col bg-slate-800">
       <div className="bg-slate-900 mask-b-from-60% mask-b-to-100% bg-[url(/bg-main.jpg)] bg-blend-hard-light  grid grid-rows-[20px_1fr_20px] items-center justify-items-center h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
@@ -9,10 +12,10 @@ export default function Home() {
         <main className="flex flex-col gap-16 row-start-2 items-center justify-center z-10">
           <div className="flex flex-col gap-4 items-center">
             <h1 className="text-3xl sm:text-5xl font-bold text-center">
-              INGREDIENT FLAVORS CO.,LTD
+              {t('companyName')}
             </h1>
             <p className="text-lg sm:text-xl text-center">
-              Formula Consultant and supply food ingredients
+              {t('breifDescription')}
             </p>
           </div>
 
@@ -21,7 +24,7 @@ export default function Home() {
             className="flex gap-4 items-center flex-col"
             href="/#about">
               <div className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]">
-                About Us
+                {t('aboutButton')}
               </div>
               <ArrowDownIcon className="size-6 sm:size-8 text-white animate-bounce" />
             </Link>
