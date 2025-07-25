@@ -65,7 +65,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="fixed h-14 w-full z-90 flex justify-center bg-transparent backdrop-blur-sm border-b border-solid border-black/[.08] dark:border-white/[.145]">
+          <div className="fixed h-16 w-full z-90 flex justify-center bg-transparent backdrop-blur-sm border-b border-solid border-black/[.08] dark:border-white/[.145]">
             <div className="fixed left-0 z-50 top-0 mx-4 my-2">
               <Link href="/#top">
                 <Image
@@ -73,7 +73,7 @@ export default function RootLayout({
                   alt="Logo"
                   width={100}
                   height={20}
-                  className="h-10 w-auto grayscale brightness-400 contrast-200"
+                  className="h-12 w-auto grayscale brightness-400 contrast-200"
                 ></Image>
               </Link>
             </div>
