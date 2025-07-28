@@ -1,17 +1,16 @@
 "use client";
 
-import { Toggle } from "@/components/ui/toggle";
-import { Button } from "@/components/ui/button";
-import { Search } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Card,
   CardDescription,
   CardPicture,
   CardTitle,
 } from "@/components/ui/card";
-import Link from "next/link";
 import Image from "next/image";
+import { Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 type Product = {
   id: string;
@@ -20,6 +19,13 @@ type Product = {
   longdescription: string;
   image: string;
   imageFile: string;
+};
+
+type ProductCategory = {
+  id: number;
+  title: string;
+  description: string;
+  product: Product[];
 };
 
 const productCategories = [
@@ -134,7 +140,7 @@ const productCategories = [
       {
         id: "3B",
         name: "Aspartame",
-        description: "A low-calorie sweetener used in many products.",
+        description: "A low-calorie sweetener.",
         longdescription:
           "Aspartame is a low-calorie artificial sweetener composed of two amino acids, phenylalanine and aspartic acid. It is approximately 200 times sweeter than sucrose, making it a popular sugar substitute in various food and beverage products. Aspartame is commonly used in diet sodas, sugar-free desserts, and low-calorie snacks. It provides sweetness without the calories associated with sugar, making it a preferred choice for individuals looking to manage their weight or reduce their sugar intake. However, individuals with phenylketonuria (PKU) should avoid aspartame due to its phenylalanine content.",
         image: "bg-[url(/images/aspartame.jpg)]",
@@ -145,18 +151,33 @@ const productCategories = [
 ];
 
 export default function Product() {
-  const [selectedProductCategories, setSelectedProductCategories] = useState<
-    Set<number>
-  >(new Set());
+  const [selectedProductCategory, setSelectedProductCategory] = useState<
+     ProductCategory | null
+  >(null);
 
-  const [selectedProduct, setSelectedProduct] = useState<Product|null>(null);
+  const topRef = useRef<HTMLDivElement>(null);
+  const productionSectionRef = useRef<HTMLDivElement>(null);
+
+  const scrollToTop = () => {
+    if (topRef.current) {
+      topRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
+  const scrollToProductionSection = () => {
+    if (productionSectionRef.current) {
+      productionSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
-    console.log("Selected Categories:", Array.from(selectedProductCategories));
+    console.log("Selected Category:", selectedProductCategory);
   });
 
   return (
-    <div className="flex flex-col bg-slate-800 ">
+    <div className="flex flex-col bg-slate-800 " ref={topRef}>
       <div className="bg-slate-900 mask-b-from-60% mask-b-to-100% bg-cover bg-[url(/bg-product.jpg)] bg-blend-hard-light justify-items-center h-screen gap-16 font-[family-name:var(--font-geist-sans)]">
         <div className="absolute w-full h-screen backdrop-blur-[3px] z-0 bg-slate-900 opacity-80" />
         <main className="relative flex flex-col gap-16 z-10 m-20">
@@ -169,91 +190,88 @@ export default function Product() {
             Select Product Categories
           </h3>
           <div className="flex flex-col gap-4 justify-center">
-            {productCategories.map((category) => (
-              <div
-                key={category.title}
-                className="flex flex-row gap-4 items-center"
-              >
-                <Toggle
-                  className="w-50 h-10 flex flex-col"
-                  defaultValue={category.id}
-                  onClick={() => {
-                    const newSelection = new Set(selectedProductCategories);
-                    if (newSelection.has(category.id)) {
-                      newSelection.delete(category.id);
-                    } else {
-                      newSelection.add(category.id);
-                    }
-                    setSelectedProductCategories(newSelection);
+            <RadioGroup
+              defaultValue={undefined}
+              className="w-120 grid grid-cols-2"
+            >
+              {productCategories.map((category) => (
+                <RadioGroupItem
+                  key={category.id}
+                  value={category.title.toString()}
+                  className="ring-[1px] ring-border rounded py-4 px-4 data-[state=checked]:ring-2 data-[state=checked]:ring-white"
+                  onClick={async () => {
+                    await setSelectedProductCategory(category);
+                    await setSelectedProduct(null); // Reset selected product when category changes
+                    await scrollToProductionSection();
                   }}
                 >
-                  {category.title}
-                </Toggle>
-                <p className="text-sm sm:text-base">{category.description}</p>
-              </div>
-            ))}
-            <Button className="w-fit text-white self-end">
-              <Link href="/product#query-result" className="flex items-center">
-                <Search className="mr-2" />
-                Search
-              </Link>
-            </Button>
+                  <span className="font-semibold">
+                    {category.title}
+                  </span>
+                </RadioGroupItem>
+              ))}
+            </RadioGroup>
           </div>
         </main>
       </div>
-      {
-        selectedProductCategories.size > 0 && 
-        <div className="min-h-screen flex flex-col gap-8 p-20" id="query-result">
-          <h2 className="text-2xl sm:text-4xl font-bold text-center">
-            Searched Product
-          </h2>
-          <div className="flex flex-row gap-8">
-            <div className="flex flex-col gap-4 w-full md:w-1/2">
-              {Array.from(selectedProductCategories).map((categoryId) => {
-                const category = productCategories.find(
-                  (cat) => cat.id === categoryId
-                );
-                return (
-                  <div key={category?.id} className="flex flex-col gap-2">
-                    <h3 className="text-lg font-bold">{category?.title}</h3>
-                    {category?.product?.map((product) => {
-                      return (
-                        <Card
-                          key={product.id}
-                          onClick={() => setSelectedProduct(product)}
-                        >
-                          <CardTitle>
-                            {product.name}
-                            <CardDescription>
-                              {product.description}
-                            </CardDescription>
-                          </CardTitle>
-                          <CardPicture
-                            className={`${product.image}`}
-                          ></CardPicture>
-                        </Card>
-                      );
-                    })}
-                  </div>
-                );
-              })}
-            </div>
-            <div className="sticky top-20 w-full md:w-1/2 h-fit min-h-100 bg-card text-card-foreground flex flex-row gap-4 rounded-xl border shadow-sm overflow-hidden transition-all hover:shadow-md focus-within:shadow-md">
-              <div className="flex flex-col gap-4 p-4 w-full">
-                <h3 className="text-lg font-bold text-center">Product Details</h3>
-                { 
-                  selectedProduct ? (
+      {selectedProductCategory != null && (
+        <div ref={productionSectionRef}>
+          <div className="sticky top-20 right-0 left-0 flex justify-end z-20">
+            <Button 
+              className="text-sm text-white/60 px-4 bg-indigo-200/20 rounded-l-2xl rounded-r-none shadow-sm flex items-center justify-center hover:bg-slate-500/80 focus:bg-slate-500/80 transition-all"
+              onClick={()=>{
+                scrollToTop();
+              }}
+              >
+              <Search className="inline" />
+              <p className="align-text-top">search product</p>
+            </Button>
+          </div>
+          <div
+            className="min-h-screen flex flex-col gap-8 p-20"
+            id="query-result"
+          >
+            <h2 className="text-2xl sm:text-4xl font-bold text-center">
+              Searched Product
+            </h2>
+            <div className="flex flex-row gap-8">
+              <div className="flex flex-col gap-4 w-full md:w-1/2">
+                <div
+                  key={selectedProductCategory.id}
+                  className="flex flex-col gap-2"
+                >
+                  <h3 className="text-lg font-bold">{selectedProductCategory?.title}</h3>
+                  {selectedProductCategory?.product?.map((product) => {
+                    return (
+                      <Card
+                        key={product.id}
+                        onClick={() => setSelectedProduct(product)}
+                      >
+                        <CardTitle>
+                          {product.name}
+                          <CardDescription>{product.description}</CardDescription>
+                        </CardTitle>
+                        <CardPicture className={`${product.image}`}></CardPicture>
+                      </Card>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="sticky top-20 w-full md:w-1/2 h-fit min-h-100 bg-card text-card-foreground flex flex-row gap-4 rounded-xl border shadow-sm overflow-hidden transition-all hover:shadow-md focus-within:shadow-md">
+                <div className="flex flex-col gap-4 p-4 w-full">
+                  <h3 className="text-lg font-bold text-center">
+                    Product Details
+                  </h3>
+                  {selectedProduct ? (
                     <div className="flex flex-col gap-2 text-center justify-center items-center">
                       <h4 className="text-md font-semibold">
                         {selectedProduct.name}
                       </h4>
-                      <p className="text-sm">
-                        {selectedProduct.description}
-                      </p>
+                      <p className="text-sm">{selectedProduct.description}</p>
                       <p className="text-sm indent-8 mt-2 text-start">
                         {selectedProduct.longdescription}
                       </p>
-                      <Image 
+                      <Image
                         src={selectedProduct.imageFile}
                         alt={selectedProduct.name}
                         width={500}
@@ -261,15 +279,17 @@ export default function Product() {
                         className="rounded-lg mt-4"
                       ></Image>
                     </div>
-                  ) :
-                  <p className="text-sm text-muted-foreground">
-                  Select a product to see details here.
-                </p>}
+                  ) : (
+                    <p className="text-sm text-muted-foreground">
+                      Select a product to see details here.
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </div>
-      }
+      )}
     </div>
   );
 }

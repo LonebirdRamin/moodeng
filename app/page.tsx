@@ -62,8 +62,6 @@ export default function Home() {
         </span>
         <div className="absolute z-10 h-screen w-full bg-cover bg-slate-900 mask-t-from-10% mask-t-to-80% bg-[url(/bg-footer.jpg)] bg-blend-hard-light" />
         <div className="absolute w-full h-screen backdrop-blur-[3px] z-10 mask-t-from-10% mask-t-to-80% bg-slate-900 opacity-70" />
-      
-
       </div>
     </div>
   );
