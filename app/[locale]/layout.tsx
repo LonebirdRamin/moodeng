@@ -13,20 +13,10 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-  DropdownMenuRadioItem,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { ChangeEvent } from "react";
-// import { usePathname } from "next/navigation";
+import LocaleSwitcher from "@/components/localeSwitcher";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,26 +33,6 @@ export const metadata: Metadata = {
   description: "Formula Consultant and supply food ingredients",
 };
 
-const navbar: { title: string; href: string; description: string }[] = [
-  {
-    title: "About",
-    href: "/#about",
-    description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
-  },
-  {
-    title: "Product",
-    href: "/product",
-    description:
-      "For sighted users to preview content available behind a link.",
-  },
-  {
-    title: "Contact",
-    href: "/contact",
-    description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-  },
-];
 
 export default async function RootLayout({
   children,
@@ -71,17 +41,32 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: Promise<{locale: string}>;
 }>) {
-  const {locale} = await params;
-  const displayLang = {
-    "en": "English",
-    "th": "Thai",
-  }
-  const onSelectChange = (e) => {
-    console.log(e.target.value);
-  }
+  const { locale } = await params;4
+
+  const t = await getTranslations('NavBar');
+
+  const navbar: { title: string; href: string; description: string }[] = [
+    {
+      title: t('nav.about'),
+      href: "/#about",
+      description:
+        "A modal dialog that interrupts the user with important content and expects a response.",
+    },
+    {
+      title: t('nav.product'),
+      href: "/product",
+      description:
+        "For sighted users to preview content available behind a link.",
+    },
+    {
+      title: t('nav.contact'),
+      href: "/contact",
+      description:
+        "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+    },
+  ];
 
   if (!hasLocale(routing.locales, locale)) {
-    console.log('test');
     notFound();
   }
 
@@ -123,19 +108,7 @@ export default async function RootLayout({
               </NavigationMenuList>
             </NavigationMenu>
             <div className="fixed right-0 z-50 mx-4 my-4">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline">{displayLang[locale]}</Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56">
-                  <DropdownMenuLabel>Language</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuRadioGroup value={locale}>
-                    <DropdownMenuRadioItem value="en">English</DropdownMenuRadioItem>
-                    <DropdownMenuRadioItem value="th">Thai</DropdownMenuRadioItem>
-                  </DropdownMenuRadioGroup>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <LocaleSwitcher currentLocale={locale}/>
             </div>
           </div>
           <NextIntlClientProvider>{children}</NextIntlClientProvider>

@@ -62,6 +62,45 @@
     "HomePage": {
         "companyName": "INGREDIENT FLAVORS CO.,LTD",
         "breifDescription": "Formula Consultant and supply food ingredients",
-        "aboutButton": "About Us"
+        "aboutButton": "About Us",
+        "introHeader": "WHO ARE WE?",
+        "firstFullDescription": "is business partner of food ingredients and Flavors to help strengthen and leverage competitiveness and added value to the Food Industry by IDF expertise team (20 years in food industrial) was organized with continued supports from our suppliers to make it all happened.",
+        "secondFullDescription": "Strong developed relationships with our Global Partners, we ensure to optimize our sourcing expertise to provide quality products with cost efficiency to your needs.",
+        "explore": "Explore More"
+    },
+    "NavBar": {
+        "nav": {
+            "about": "About",
+            "product": "Product",
+            "contact": "Contact"
+        }
+    },
+    "Contact": {
+        "phone": "Tel",
+        "mail": "Email",
+        "address": "Address"
+    },
+    "ContactUs": {
+        "title": "Contact Us",
+        "briefDescription": "We are here to help you with your food ingredient needs.   ",
+        "form": {
+            "header": {
+                "name": "Name",
+                "telephone": "Telephone",
+                "email": "Email",
+                "message": "Message"
+            },
+            "description": {
+                "name": "Your full name",
+                "telephone": "Your contact number",
+                "email": "Your email address",
+                "message": "Your message or inquiry"
+            },
+            "placeholder": {
+                "name": "Smith Akimoto",
+                "message": "Type your message here."
+            },
+            "submit": "Submit"
+        }
     }
 }   

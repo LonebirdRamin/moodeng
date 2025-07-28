@@ -37,20 +37,14 @@ export default function Home() {
       >
         <span className="z-20 flex flex-col justify-center items-center gap-8 rounded-xl backdrop-blur-lg bg-white/10 p-8 shadow-md max-w-3xl">
           <h2 className="text-2xl sm:text-4xl font-bold text-center">
-            WHO ARE WE ?
+            {t('introHeader')}
           </h2>
           <div className="text-center flex flex-col justify-center items-center gap-4">
             <p>
-              <b>Ingredient Flavor Co., Ltd.</b> is business partner of food
-              ingredients and Flavors to help strengthen and leverage
-              competitiveness and added value to the Food Industry by IDF
-              expertise team (20 years in food industrial) was organized with
-              continued supports from our suppliers to make it all happened.
+              <b>{t('companyName')}</b> {t('firstFullDescription')}
             </p>
             <p>
-              Strong developed relationships with our Global Partners, we ensure
-              to optimize our sourcing expertise to provide quality products with
-              cost efficiency to your needs
+              {t('secondFullDescription')}
             </p>
           </div>
         <div className="flex gap-4 items-center flex-col">
@@ -58,7 +52,7 @@ export default function Home() {
             className="flex gap-4 items-center flex-col"
             href="/product">
               <div className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]">
-                Explore More
+                {t('explore')}
               </div>
             </Link>
           </div>
