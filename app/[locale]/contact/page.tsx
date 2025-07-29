@@ -16,6 +16,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useTranslations } from "next-intl";
+import { fromTheme } from "tailwind-merge";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -25,6 +27,8 @@ const formSchema = z.object({
 });
 
 export default function Contact() {
+  const t = useTranslations('ContactUs');
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -47,10 +51,10 @@ export default function Contact() {
         <main className="relative flex flex-col gap-16 z-10 m-20">
           <div className="flex flex-col gap-4 items-center">
             <h2 className="text-2xl sm:text-3xl font-bold text-center">
-              Contact Us
+              {t('title')}
             </h2>
             <p className="text-lg sm:text-xl text-center">
-              We are here to help you with your food ingredient needs.
+              {t('briefDescription')}
             </p>
 
             <Form {...form}>
@@ -63,12 +67,12 @@ export default function Contact() {
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Name</FormLabel>
+                      <FormLabel>{t('form.header.name')}</FormLabel>
                       <FormControl>
-                        <Input placeholder="Smith Akimoto" {...field} />
+                        <Input placeholder={t('form.placeholder.name')} {...field} />
                       </FormControl>
                       <FormDescription>
-                        Your full name
+                        {t('form.description.name')}
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -79,12 +83,12 @@ export default function Contact() {
                   name="tel"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Telephone</FormLabel>
+                      <FormLabel>{t('form.header.telephone')}</FormLabel>
                       <FormControl>
                         <Input type="tel" placeholder="0000000000" {...field} />
                       </FormControl>
                       <FormDescription>
-                        Your contact number
+                        {t('form.description.telephone')}
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -95,12 +99,12 @@ export default function Contact() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel>{t('form.header.email')}</FormLabel>
                       <FormControl>
                         <Input type="email" placeholder="abc@mail.com" {...field} />
                       </FormControl>
                       <FormDescription>
-                        Your email address
+                        {t('form.description.email')}
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -111,18 +115,18 @@ export default function Contact() {
                   name="message"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Message</FormLabel>
+                      <FormLabel>{t('form.header.message')}</FormLabel>
                       <FormControl>
-                        <Textarea placeholder="Type your message here." {...field} />
+                        <Textarea placeholder={t('form.placeholder.message')} {...field} />
                       </FormControl>
                       <FormDescription>
-                        Your message or inquiry
+                        {t('form.description.message')}
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                <Button className="col-start-1 col-end-3" type="submit">Submit</Button>
+                <Button className="col-start-1 col-end-3" type="submit">{t('form.submit')}</Button>
               </form>
             </Form>
           </div>

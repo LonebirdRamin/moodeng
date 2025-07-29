@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import Link from "next/link";
 import Image from "next/image";
 import { ThemeProvider } from "@/components/theme-providers";
+import { routing } from "@/i18n/routing";
 
 import {
   NavigationMenu,
@@ -14,6 +15,10 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Mail, Phone, Printer } from "lucide-react";
 import QRLine from "@/public/qr-line.jpg";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
+import LocaleSwitcher from "@/components/localeSwitcher";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,35 +35,46 @@ export const metadata: Metadata = {
   description: "Formula Consultant and supply food ingredients",
 };
 
-const navbar: { title: string; href: string; description: string }[] = [
-  {
-    title: "About",
-    href: "/#about",
-    description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
-  },
-  {
-    title: "Product",
-    href: "/product",
-    description:
-      "For sighted users to preview content available behind a link.",
-  },
-  {
-    title: "Contact",
-    href: "/contact",
-    description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-  },
-];
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{locale: string}>;
 }>) {
+  const { locale } = await params;4
+
+  const t = await getTranslations('NavBar');
+
+  const navbar: { title: string; href: string; description: string }[] = [
+    {
+      title: t('nav.about'),
+      href: "/#about",
+      description:
+        "A modal dialog that interrupts the user with important content and expects a response.",
+    },
+    {
+      title: t('nav.product'),
+      href: "/product",
+      description:
+        "For sighted users to preview content available behind a link.",
+    },
+    {
+      title: t('nav.contact'),
+      href: "/contact",
+      description:
+        "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+    },
+  ];
+
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+
   return (
     <>
-      <html lang="en" suppressHydrationWarning className="scroll-smooth">
+      <html lang={locale} suppressHydrationWarning className="scroll-smooth">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
@@ -94,9 +110,12 @@ export default function RootLayout({
                   ))}
                 </NavigationMenuList>
               </NavigationMenu>
-            </div>
-            {children}
-          </ThemeProvider>
+              <div className="fixed right-0 z-50 mx-4 my-4">
+                <LocaleSwitcher currentLocale={locale}/>
+              </div>
+          </div>
+          <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        </ThemeProvider>
         </body>
       </html>
       <footer className="bg-slate-900">
