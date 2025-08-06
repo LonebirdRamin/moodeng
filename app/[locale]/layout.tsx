@@ -87,7 +87,7 @@ export default async function RootLayout({
             <div className="fixed h-16 w-full z-90 flex justify-center bg-transparent backdrop-blur-sm border-b border-solid border-black/[.08] dark:border-white/[.145]">
               <div className="fixed left-0 z-50 top-0 mx-4 my-2">
                 <Link href="/#top">
-                  <Image  
+                  <Image
                     src="/idf-logo.png"
                     alt="Logo"
                     width={100}
@@ -116,48 +116,48 @@ export default async function RootLayout({
             </div>
             <NextIntlClientProvider>{children}</NextIntlClientProvider>
           </ThemeProvider>
-          <footer className="bg-slate-900">
-            <div className="grid grid-cols-3 w-full py-4 px-20 text-sm gap-4">
-              <div className="flex flex-col text-white h-fit gap-2 justify-center items-center">
-                <h1 className="font-bold text-center">
-                  {t('footer.address.title')}
-                </h1>
-                <p className="leading-6 text-center">
-                  {t('footer.address.line1')}<br />
-                  {t('footer.address.line2')}<br />
-                  {t('footer.address.line3')}
-                </p>
-              </div>
-              <div className="flex flex-col text-white h-fit gap-2 justify-center items-center">
-                <h1 className="text-md font-bold text-center">{t('footer.contact')}</h1>
-                <span className="flex flex-row items-center gap-2">
-                  <Phone className="inline" size={12} />
-                  <p className="text-sm">062-452-5642</p>
-                </span>
-                <span className="flex flex-row items-center gap-2">
-                  <Printer className="inline" size={12} />
-                  <p className="text-sm">02-116-9247</p>
-                </span>
-                <span className="flex flex-row items-center gap-2">
-                  <Mail className="inline" size={12} />
-                  <p className="text-sm">idf2558@gmail.com</p>
-                </span>
-              </div>
-              <div className="flex flex-col text-white h-fit gap-2 justify-center items-center">
-                <h1 className="text-md font-bold text-center">
-                  {t('footer.line')}
-                </h1>
-                <Image src={QRLine} alt="Line QR Code" height={100} width={100} />
-              </div>
-            </div>
-            <div className="flex justify-center items-center bg-black/20 text-white py-2">
-              <p className="text-sm">
-                © {new Date().getFullYear()} Querian. All rights reserved.
-              </p>
-            </div>
-          </footer>
         </body>
       </html>
+      <footer className="bg-slate-900">
+        <div className="grid grid-cols-3 w-full py-4 px-20 text-sm gap-4">
+          <div className="flex flex-col text-white h-fit gap-2 justify-center items-center">
+            <h1 className="font-bold text-center">
+              {t('footer.address.title')}
+            </h1>
+            <p className="leading-6 text-center">
+              {t('footer.address.line1')}<br />
+              {t('footer.address.line2')}<br />
+              {t('footer.address.line3')}
+            </p>
+          </div>
+          <div className="flex flex-col text-white h-fit gap-2 justify-center items-center">
+            <h1 className="text-md font-bold text-center">{t('footer.contact')}</h1>
+            <span className="flex flex-row items-center gap-2">
+              <Phone className="inline" size={12} />
+              <p className="text-sm">062-452-5642</p>
+            </span>
+            <span className="flex flex-row items-center gap-2">
+              <Printer className="inline" size={12} />
+              <p className="text-sm">02-116-9247</p>
+            </span>
+            <span className="flex flex-row items-center gap-2">
+              <Mail className="inline" size={12} />
+              <p className="text-sm">idf2558@gmail.com</p>
+            </span>
+          </div>
+          <div className="flex flex-col text-white h-fit gap-2 justify-center items-center">
+            <h1 className="text-md font-bold text-center">
+              {t('footer.line')}
+            </h1>
+            <Image src={QRLine} alt="Line QR Code" height={100} width={100} />
+          </div>
+        </div>
+        <div className="flex justify-center items-center bg-black/20 text-white py-2">
+          <p className="text-sm">
+            © {new Date().getFullYear()} Querian. All rights reserved.
+          </p>
+        </div>
+      </footer>
     </>
   );
 }
