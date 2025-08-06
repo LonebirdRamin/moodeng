@@ -68,11 +68,21 @@
         "secondFullDescription": "Strong developed relationships with our Global Partners, we ensure to optimize our sourcing expertise to provide quality products with cost efficiency to your needs.",
         "explore": "Explore More"
     },
-    "NavBar": {
+    "Layout": {
         "nav": {
             "about": "About",
             "product": "Product",
             "contact": "Contact"
+        },
+        "footer": {
+            "address": {
+                "title": "Ingredient Flavors Co., Ltd.",
+                "line1": "450/32. Anamai Ngamchareon Road,",
+                "line2": "Takham, Bangkhunthian,",
+                "line3": "Bangkok, 10150, Thailand"
+            },
+            "contact": "Contact Us",
+            "line": "Line Direct Message"
         }
     },
     "Contact": {
